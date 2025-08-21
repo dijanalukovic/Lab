@@ -1,0 +1,56 @@
+﻿@page "/counter"
+@rendermode InteractiveServer
+@using DataLayer
+@using BusinessLayer
+@using DataLayer.Models
+@inject NavigationManager navigate
+
+@inject IBussinesMenuItem bus
+
+<PageTitle>Jelovnik</PageTitle>
+
+<h1>Jelovnik</h1>
+
+<button type="button" class="btn btn-warning px-5 my-4" @onclick="Add" style="float:right">Add</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(cenovnik != null)
+        {
+            @foreach(MenuItem item in cenovnik)
+            {
+                <tr>
+
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    <td>@item.Price</td>
+                    
+
+                </tr>
+            }
+        }
+        
+      
+    </tbody>
+</table>
+@code {
+    private List<MenuItem>? cenovnik { get; set; }
+
+    protected override void OnInitialized()
+    {
+        cenovnik = bus.GetMenuItemsInRange(1000, 3000);
+    }
+    private void Add()
+    {
+        navigate.NavigateTo("/AddItem");
+    }
+   
+}
