@@ -1,4 +1,9 @@
 {
-  "ExpandedNodes": [],
+  "ExpandedNodes": [
+    "",
+    "\\BusinessLayer",
+    "\\DataLayer"
+  ],
+  "SelectedNode": "\\DataLayer",
   "PreviewInSolutionExplorer": false
 }

@@ -1,0 +1,61 @@
+﻿@page "/additem"
+@rendermode InteractiveServer
+@using DataLayer
+@using BusinessLayer
+@using DataLayer.Models
+@inject NavigationManager navigate
+
+@inject IBussinesMenuItem bus
+
+<PageTitle>Jelovnik</PageTitle>
+
+<h1>Jelovnik</h1>
+
+@if (cenovnik != null)
+{
+
+
+    <form>
+        <div class="mb-3">
+            <label for="exampleInputFirstName" class="form-label">First name</label>
+            <input type="text" @bind="cenovnik.Title" >
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputFirstName" class="form-label">First name</label>
+            <input type="text" @bind="cenovnik.Description">
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputFirstName" class="form-label">First name</label>
+            <input type="text" @bind="cenovnik.Price">
+
+        </div>
+       
+
+        <button type="button" @onclick="Save" class="btn btn-primary">Submit</button>
+    </form>
+}
+
+@code {
+    private MenuItem? cenovnik;
+
+    protected override void OnInitialized()
+    {
+        cenovnik = new MenuItem();
+    }
+
+
+
+    private void Save()
+    {
+
+        if (cenovnik != null)
+        {
+            var result = bus.InsertMenuitem(cenovnik);
+            navigate.NavigateTo("/counter");
+        }
+
+    }
+  
+}
